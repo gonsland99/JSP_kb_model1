@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	
+	pageEncoding="UTF-8" import="com.test.model1.dao.BbsDAO, com.test.model1.vo.Bbs, java.util.Vector"%>
 <%
 	request.setCharacterEncoding("utf-8");
-	if(session.getAttribute("userId") != null) {
-		out.println("<script>");
-		out.println("alert('로그인 중에는 회원가입이 불가능합니다.');");
-		out.println("location.href='main.jsp'");
-		out.println("</script>");
-	}
+	BbsDAO bbsDAO = new BbsDAO();
+	int pageNumber = 1;
+	if(request.getParameter("pageNumber") != null) 
+	pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+	Vector<Bbs> list = bbsDAO.getList(pageNumber);
 %>
 <!doctype html>
 <html lang="ko">
@@ -18,7 +18,7 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
 <!-- top main menu -->
-<title>회원가입</title>
+<title>메인페이지</title>
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm navbar-light bg-light">
@@ -33,10 +33,10 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active">
-					<a class="nav-link" href="main.jsp">메인</a>
+					<a class="nav-link active" href="main.jsp">메인</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="bbs.jsp">게시판</a>
+					<a class="nav-link" href="bbs.jsp">게시판<span class="sr-only">(current)</span></a>
 				</li>
 			</ul>
 			<ul class="navbar-nav ml-auto">
@@ -51,8 +51,7 @@
 						<a class="dropdown-item" href="logoutAction.jsp">로그아웃</a>
 					<% }%>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item active" href="join.jsp">회원가입
-						<span class="sr-only">(current)</span></a>
+						<a class="dropdown-item" href="join.jsp">회원가입</a>
 					</div>
 				</li>
 			</ul>
@@ -60,41 +59,37 @@
 	</nav>
 	<!-- Login main page -->
 	<div class="container pt-3">
-		<div class="col-lg-4 offset-lg-4">
-			<div class="jumbotron pt-5">
-				<form method="post" action="joinAction.jsp">
-					<h3 class="text-center pb-2">회원가입</h3>
-					<div class="form-group">
-						<input type="text" class="form-control" name="userId" placeholder="아이디" 
-						maxlength="20" required="required" autocomplete="no"/>
-					</div>
-					<div class="form-group">
-						<input type="password" class="form-control" name="userPassword" placeholder="비밀번호" 
-						maxlength="20" required="required"/>
-					</div>
-					<div class="form-group">
-						<input type="text" class="form-control" name="userName" placeholder="이름" 
-						maxlength="20" required="required"/>
-					</div>
-					<div class="form-group text-center mb-3">
-						<div class="btn-group btn-group-toggle" data-toggle="buttons">
-						 	<label class="btn btn-primary active">
-						    	<input type="radio" name="userGender" id="option1" checked="checked"
-						    	value="남성"> 남성
-						 	</label>
-						 	<label class="btn btn-primary">
-						    	<input type="radio" name="userGender" id="option2" value="여성"> 여성
-						 	</label>
-						</div>
-					</div>
-					<div class="form-group">
-						<input type="email" class="form-control" name="userEmail" placeholder="이메일" 
-						required="required"/>
-					</div>
-					<button type="submit" class="btn btn-success form-control">회원가입</button>
-				</form>
-			</div>
-		</div>
+	<div class="row">
+		<table class="table table-striped text-center table-bordered">
+			<thead class="thead-dark">
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+				</tr>
+			</thead>
+			<tbody>
+			<%
+				for(Bbs bbs : list){
+					out.println("<tr>");
+					out.println("<td>" + bbs.getBbsId() + "</td>");
+					out.println("<td>" + bbs.getBbsTitle() + "</td>");
+					out.println("<td>" + bbs.getUserId() + "</td>");
+					out.println("<td>" + bbs.getBbsDate() + "</td>");
+					out.println("</tr>");
+				}
+			%>
+				<tr>
+					<td>1</td>
+					<td>안녕하세요!</td>
+					<td>홍길동</td>
+					<td>2018-01-01</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<a href="write.jsp" class="btn btn-primary float-right" id="writeBtn">글쓰기</a>
 	</div>
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->

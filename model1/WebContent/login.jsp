@@ -65,11 +65,11 @@
 				<form method="post" action="loginAction.jsp">
 					<h3 class="text-center pb-2">JSP 게시판</h3>
 					<div class="form-group">
-						<input type="text" class="form-control" name="useId" placeholder="아이디" 
+						<input type="text" class="form-control" name="userId" placeholder="아이디" 
 						maxlength="20" required="required" autocomplete="no"/>
 					</div>
 					<div class="form-group">
-						<input type="password" class="form-control" name="usePassword" placeholder="비밀번호" 
+						<input type="password" class="form-control" name="userPassword" placeholder="비밀번호" 
 						maxlength="20" required="required"/>
 					</div>
 					<button type="submit" class="btn btn-primary form-control">로그인</button>

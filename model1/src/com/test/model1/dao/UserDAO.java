@@ -40,7 +40,9 @@ public class UserDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
 			rs = pstmt.executeQuery();
+			System.out.println(rs.next());
 			if(rs.next()) {
+				System.out.println(rs.getString(1));
 				if(rs.getString(1).equals(userPassword)) {
 					return 1;		//로그인 성공
 				} else {
@@ -59,7 +61,7 @@ public class UserDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user.getUserId());
 			pstmt.setString(2, user.getUserPassword());
-			pstmt.setString(3, user.getUseName());
+			pstmt.setString(3, user.getUserName());
 			pstmt.setString(4, user.getUserGender());
 			pstmt.setString(5, user.getUserEmail());
 			pstmt.executeUpdate();

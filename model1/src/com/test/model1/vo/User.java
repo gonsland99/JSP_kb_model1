@@ -3,10 +3,9 @@ package com.test.model1.vo;
 public class User {
 	private String userId;
     private String userPassword;
-    private String useName;
+    private String userName;
     private String userGender;
     private String userEmail;
-    
 	public String getUserId() {
 		return userId;
 	}
@@ -19,11 +18,11 @@ public class User {
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
 	}
-	public String getUseName() {
-		return useName;
+	public String getUserName() {
+		return userName;
 	}
-	public void setUseName(String useName) {
-		this.useName = useName;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public String getUserGender() {
 		return userGender;
@@ -38,6 +37,5 @@ public class User {
 		this.userEmail = userEmail;
 	}
     
-    
-    
+  
 }

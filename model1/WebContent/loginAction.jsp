@@ -23,7 +23,7 @@
 		out.println("</script>");
 	} else if(result == -1){
 		out.println("<script>");
-		out.println("alert('아이디가 존재하지 않습니다.')");
+		out.println("alert('"+ result + " 아이디가 존재하지 않습니다.')");
 		out.println("history.back()");
 		out.println("</script>");
 	} else if(result == -2){
